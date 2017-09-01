@@ -1,7 +1,7 @@
 name:
   optparse-applicative-simple
 version:
-  1
+  1.0.1
 category:
   CLI, Parsing, Options
 synopsis:
@@ -52,7 +52,7 @@ library
     Haskell2010
   build-depends:
     -- 
-    optparse-applicative == 0.13.*,
+    optparse-applicative >= 0.14 && < 0.15,
     attoparsec == 0.13.*,
     -- 
     text == 1.*,
@@ -80,5 +80,5 @@ test-suite demo
     Haskell2010
   build-depends:
     optparse-applicative-simple,
-    attoparsec-data == 0.1.*,
+    attoparsec-data == 1.*,
     rerebase == 1.*

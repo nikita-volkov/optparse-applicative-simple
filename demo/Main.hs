@@ -3,7 +3,7 @@ module Main where
 import Prelude
 import qualified OptparseApplicative.Simple.Parser as A
 import qualified OptparseApplicative.Simple.IO as B
-import qualified Attoparsec.Data.Explicit as B
+import qualified Attoparsec.Data as B
 
 
 main =
