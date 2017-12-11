@@ -54,6 +54,7 @@ library
     -- 
     optparse-applicative >= 0.14 && < 0.15,
     attoparsec == 0.13.*,
+    attoparsec-data == 1.*,
     -- 
     text == 1.*,
     base-prelude < 2

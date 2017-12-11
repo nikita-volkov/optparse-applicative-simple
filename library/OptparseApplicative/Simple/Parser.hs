@@ -2,6 +2,7 @@ module OptparseApplicative.Simple.Parser
 (
   Parser,
   argument,
+  lenientArgument,
 )
 where
 
@@ -10,6 +11,7 @@ import Data.Text (Text)
 import qualified Options.Applicative as A
 import qualified Data.Attoparsec.Text as B
 import qualified Data.Text as C
+import qualified Attoparsec.Data as D
 
 
 {-|
@@ -36,6 +38,21 @@ argument longName shortName description defaultValue parser =
   where
     readM =
       A.eitherReader (B.parseOnly parser . C.pack)
+    mods =
+      A.long (C.unpack longName) <>
+      foldMap A.short shortName <>
+      foldMap (A.help . C.unpack) description <>
+      foldMap (\(value, text) -> A.value value <> A.showDefaultWith (const (C.unpack text))) defaultValue
+
+{-|
+Same as 'argument', only provided with a default parser.
+-}
+lenientArgument :: D.LenientParser a => Text -> Maybe Char -> Maybe Text -> Maybe (a, Text) -> A.Parser a
+lenientArgument longName shortName description defaultValue =
+  A.option readM mods
+  where
+    readM =
+      A.eitherReader (B.parseOnly D.lenientParser . C.pack)
     mods =
       A.long (C.unpack longName) <>
       foldMap A.short shortName <>
