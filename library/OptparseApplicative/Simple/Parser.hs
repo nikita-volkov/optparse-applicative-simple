@@ -2,7 +2,9 @@ module OptparseApplicative.Simple.Parser
 (
   Parser,
   argument,
+  showableArgument,
   lenientArgument,
+  showableLenientArgument,
 )
 where
 
@@ -44,6 +46,17 @@ argument longName shortName description defaultValue parser =
       foldMap (A.help . C.unpack) description <>
       foldMap (\(value, text) -> A.value value <> A.showDefaultWith (const (C.unpack text))) defaultValue
 
+showableArgument
+  :: Show a
+  => Text -- ^ Long name
+  -> Maybe Char -- ^ Possible short name
+  -> Maybe Text -- ^ Possible description
+  -> Maybe a -- ^ Possible default value
+  -> B.Parser a -- ^ Attoparsec parser of the value. The \"attoparsec-data\" package provides such parsers for a lot of standard types
+  -> A.Parser a
+showableArgument longName shortName description defaultValue parser =
+  argument longName shortName description (fmap (\ x -> (x, fromString (show x))) defaultValue) parser
+
 {-|
 Same as 'argument', only provided with a default parser.
 -}
@@ -58,3 +71,10 @@ lenientArgument longName shortName description defaultValue =
       foldMap A.short shortName <>
       foldMap (A.help . C.unpack) description <>
       foldMap (\(value, text) -> A.value value <> A.showDefaultWith (const (C.unpack text))) defaultValue
+
+{-|
+Same as 'showableArgument', only provided with a default parser.
+-}
+showableLenientArgument :: (D.LenientParser a, Show a) => Text -> Maybe Char -> Maybe Text -> Maybe a -> A.Parser a
+showableLenientArgument longName shortName description defaultValue =
+  lenientArgument longName shortName description (fmap (\ x -> (x, fromString (show x))) defaultValue)
