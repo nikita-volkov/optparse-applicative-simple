@@ -1,6 +1,6 @@
 module OptparseApplicative.Simple.IO
 (
-  parser,
+  parseCmdArgs,
 )
 where
 
@@ -14,11 +14,11 @@ import qualified Options.Applicative as B
 {-|
 Parses the application arguments and outputs help when needed.
 -}
-parser 
+parseCmdArgs 
   :: Text -- ^ Program description
   -> D.Parser a -- ^ Arguments specification
   -> IO a -- ^ IO action producing the parsed arguments
-parser description parser =
+parseCmdArgs description parser =
   parserInfo (C.parser description parser)
 
 parserInfo :: C.ParserInfo a -> IO a
