@@ -17,7 +17,7 @@ Parses the application arguments and outputs help when needed.
 parseCmdArgs 
   :: Text -- ^ Program description
   -> D.Parser a -- ^ Arguments specification
-  -> IO a -- ^ IO action producing the parsed arguments
+  -> IO a -- ^ IO action producing the parsed arguments or failing
 parseCmdArgs description parser =
   parserInfo (C.parser description parser)
 
