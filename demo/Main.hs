@@ -7,7 +7,7 @@ import qualified Attoparsec.Data as B
 
 
 main =
-  B.parser "demo" parser >>= print
+  B.parseCmdArgs "demo" parser >>= print
   where
     parser =
       (,,) <$> arg1 <*> arg2 <*> arg3
