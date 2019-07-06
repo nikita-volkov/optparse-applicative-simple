@@ -1,5 +1,5 @@
 name: optparse-applicative-simple
-version: 1.1.0.1
+version: 1.1.0.2
 category: CLI, Parsing, Options
 synopsis: Simple command line interface arguments parser
 description:
