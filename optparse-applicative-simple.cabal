@@ -32,7 +32,7 @@ library
     attoparsec ==0.13.*,
     attoparsec-data ==1.*,
     base-prelude <2,
-    optparse-applicative >=0.14 && <0.15,
+    optparse-applicative >=0.14 && <0.16,
     text ==1.*
 
 test-suite demo
